@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Udhaar Khata</title>
+  <meta name="description" content="Track customer credit (udhaar) and payments for your shop. Works offline, data stays on your phone.">
+  <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b1215" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Udhaar Khata">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="./icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="appbar no-print" id="appbar">
+    <button class="icon-btn" id="back-btn" type="button" aria-label="Back" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="appbar-title">
+      <h1 id="page-title">Udhaar Khata</h1>
+      <p id="page-subtitle" class="appbar-sub"></p>
+    </div>
+    <div class="appbar-actions" id="appbar-actions"></div>
+  </header>
+
+  <main id="view" class="view" tabindex="-1">
+    <noscript><p class="card">Udhaar Khata needs JavaScript to run.</p></noscript>
+  </main>
+
+  <nav class="bottom-nav no-print" id="bottom-nav" aria-label="Main">
+    <a href="#/" data-nav="home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#/customers" data-nav="customers">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 010 6.8"/><path d="M18 14.8c1.8.7 3 2.4 3.5 5.2"/></svg>
+      <span>Customers</span>
+    </a>
+    <a href="#/settings" data-nav="settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div id="sheet-root"></div>
+  <div id="toast" class="toast no-print" role="status" aria-live="polite"></div>
+  <div id="lock" class="lock no-print" hidden></div>
+
+  <script src="./js/money.js"></script>
+  <script src="./js/store.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
