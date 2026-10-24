@@ -133,10 +133,30 @@ test('dashboardStats: totals, month boundaries, top 5 and overdue', () => {
   assert.equal(st.customersWithDues, 6);
   assert.equal(st.collectedThisMonth, 15000);
   assert.equal(st.givenThisMonth, 200000);
+  assert.equal(st.givenToday, 0);
+  assert.equal(st.collectedToday, 5000);
+  assert.equal(st.entriesToday, 1);
   assert.deepEqual(st.topDebtors.map((s) => s.customer.id), ['b', 'a', 'c', 'd', 'e']);
   assert.deepEqual(st.overdue.map((s) => s.customer.id), ['a']);
   assert.equal(st.series.length, 30);
   assert.equal(st.series.reduce((n, d) => n + d.gave, 0), 200000);
+});
+
+test('dashboardStats: today card counts only today and known customers', () => {
+  const customers = [cust('a', 'A'), cust('b', 'B')];
+  const entries = [
+    entry('a', 'gave', 1000, TODAY),
+    entry('b', 'gave', 250.5, TODAY),
+    entry('a', 'got', 400, TODAY),
+    entry('a', 'gave', 999, '2026-10-23'), // yesterday
+    entry('ghost', 'got', 999, TODAY) // deleted customer
+  ];
+  const st = M.dashboardStats(customers, entries, TODAY);
+  assert.equal(st.givenToday, 125050);
+  assert.equal(st.collectedToday, 40000);
+  assert.equal(st.entriesToday, 3);
+  const empty = M.dashboardStats(customers, [], TODAY);
+  assert.deepEqual([empty.givenToday, empty.collectedToday, empty.entriesToday], [0, 0, 0]);
 });
 
 test('dailySeries: 30 buckets ending today, out-of-range entries ignored', () => {

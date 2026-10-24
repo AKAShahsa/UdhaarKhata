@@ -1,6 +1,6 @@
 /* Udhaar Khata service worker — offline app shell.
  * Bump CACHE whenever any file below changes so phones pick up the update. */
-var CACHE = 'udhaarkhata-v1';
+var CACHE = 'udhaarkhata-v2';
 var ASSETS = [
   './',
   './index.html',

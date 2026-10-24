@@ -12,7 +12,7 @@ A simple, mobile-first credit (udhaar) and payment ledger for small shops. Recor
 | --- | --- |
 | Customers | Add, edit, delete (name, phone, note). Search, sort by highest balance / name / recent activity, filters: All · Owes me · Overdue · Settled |
 | Entries | **You gave** (credit) and **You got** (payment) with amount, date, note and optional due date. Running balance after every entry. Edit or delete with confirmation |
-| Dashboard | Total to collect, collected this month, customers with dues, overdue list, top 5 debtors, 30-day credit vs payment chart |
+| Dashboard | Total to collect, collected this month, today's credit given and payments received, customers with dues, overdue list, top 5 debtors, 30-day credit vs payment chart |
 | Reminders | WhatsApp button opens `wa.me` with a polite pre-filled message (shop name, balance, due date). Template editable in Settings |
 | Statement | Printable customer statement with your shop name on top — Print or Save as PDF, any date range |
 | Settings | Shop name, phone, currency (default `Rs`), WhatsApp country code, reminder template, light/dark theme, optional 4-digit PIN lock |
@@ -39,7 +39,7 @@ A simple, mobile-first credit (udhaar) and payment ledger for small shops. Recor
 
 **Add a customer** — Tap **+ Add customer**, enter a name (phone is needed for WhatsApp and calls), and save.
 
-**Record credit** — Open the customer and tap the red **You gave** button. Enter the amount, date, an optional note (e.g. "Flour 20kg") and an optional due date (quick buttons: 7 / 15 / 30 days).
+**Record credit** — Open the customer and tap the red **You gave** button. Enter the amount (or tap the quick buttons **+100 / +500 / +1,000 / +5,000** — they add up, so +500 then +100 makes 600), date, an optional note (e.g. "Flour 20kg") and an optional due date (quick buttons: 7 / 15 / 30 days).
 
 **Record a payment** — Tap the green **You got** button and enter the amount received.
 

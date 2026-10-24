@@ -185,13 +185,20 @@
     var summaries = summarize(customers, entries, today);
     var month = today.slice(0, 7);
     var totalToCollect = 0, withDues = 0, collectedThisMonth = 0, givenThisMonth = 0;
+    var givenToday = 0, collectedToday = 0, entriesToday = 0;
     summaries.forEach(function (s) {
       if (s.balance > 0) { totalToCollect += s.balance; withDues++; }
     });
     var known = {};
     customers.forEach(function (c) { known[c.id] = true; });
     entries.forEach(function (e) {
-      if (!known[e.customerId] || e.date.slice(0, 7) !== month) return;
+      if (!known[e.customerId]) return;
+      if (e.date === today) {
+        entriesToday++;
+        if (e.type === 'got') collectedToday += e.amount;
+        else givenToday += e.amount;
+      }
+      if (e.date.slice(0, 7) !== month) return;
       if (e.type === 'got') collectedThisMonth += e.amount;
       else givenThisMonth += e.amount;
     });
@@ -204,6 +211,9 @@
       totalToCollect: totalToCollect,
       collectedThisMonth: collectedThisMonth,
       givenThisMonth: givenThisMonth,
+      givenToday: givenToday,
+      collectedToday: collectedToday,
+      entriesToday: entriesToday,
       customersWithDues: withDues,
       overdue: overdue,
       topDebtors: topDebtors,

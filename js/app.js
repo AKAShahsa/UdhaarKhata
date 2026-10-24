@@ -184,6 +184,11 @@
       '<div class="card stat"><div class="stat-label">Customers with dues</div>' +
       '<div class="stat-value">' + st.customersWithDues + '</div>' +
       '<div class="stat-foot">' + st.overdue.length + ' overdue</div></div>' +
+      '<div class="card stat today"><div class="stat-label">Today</div>' +
+      '<div class="today-split">' +
+      '<div><div class="stat-foot">You gave</div><div class="stat-value" style="color:var(--gave)">' + esc(money(st.givenToday)) + '</div></div>' +
+      '<div><div class="stat-foot">You got</div><div class="stat-value" style="color:var(--got)">' + esc(money(st.collectedToday)) + '</div></div>' +
+      '</div><div class="stat-foot">' + (st.entriesToday ? st.entriesToday + ' entr' + (st.entriesToday === 1 ? 'y' : 'ies') + ' today' : 'No entries yet today') + '</div></div>' +
       '</div>';
 
     html += '<section class="card chart" aria-labelledby="chart-title">' +
@@ -622,6 +627,11 @@
       '<button type="button" class="got" data-type="got" aria-pressed="' + (e.type === 'got') + '">You got (payment)</button></div>' +
       '<label class="field"><span>Amount (' + cur + ') *</span><input name="amount" class="amount-input" inputmode="decimal" autocomplete="off" placeholder="0" autofocus value="' + (e.amount ? esc(M.toInputValue(e.amount)) : '') + '">' +
       '<span class="error" id="amt-err" hidden>Enter an amount greater than 0.</span></label>' +
+      '<div class="quick" role="group" aria-label="Quick amounts" style="margin:-6px 0 14px">' +
+      [100, 500, 1000, 5000].map(function (n) {
+        return '<button type="button" class="chip" data-quick="' + n + '" aria-label="Add ' + esc(money(n * 100)) + '">+' + esc(M.formatMoney(n * 100, '')) + '</button>';
+      }).join('') +
+      '<button type="button" class="chip" data-quick="0">Clear</button></div>' +
       '<div class="field-row"><label class="field"><span>Date</span><input name="date" type="date" required value="' + esc(e.date) + '" max="' + esc(M.addDays(today(), 365)) + '"></label>' +
       '<label class="field" id="due-field"><span>Due date (optional)</span><input name="dueDate" type="date" value="' + esc(e.dueDate) + '"></label></div>' +
       '<div class="quick" id="due-quick" style="margin:-6px 0 14px">' +
@@ -644,6 +654,16 @@
     syncType();
     $all('.segmented button', h.el).forEach(function (b) {
       b.addEventListener('click', function () { curType = b.getAttribute('data-type'); syncType(); });
+    });
+    // Quick amounts add up, so 500 + 100 can be tapped as two buttons.
+    $all('[data-quick]', h.el).forEach(function (b) {
+      b.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        var n = +b.getAttribute('data-quick') * 100;
+        var current = M.parseAmount(form.amount.value) || 0;
+        form.amount.value = n ? M.toInputValue(current + n) : '';
+        $('#amt-err', h.el).hidden = true;
+      });
     });
     $all('[data-due]', h.el).forEach(function (b) {
       b.addEventListener('click', function () {
