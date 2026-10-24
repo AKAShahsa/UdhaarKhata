@@ -1,0 +1,11 @@
+{
+  "name": "udhaar-khata",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline credit (udhaar) and payment ledger for small shops. Plain HTML/CSS/JS, no build step.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 8080"
+  }
+}
